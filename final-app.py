@@ -7,15 +7,14 @@ from PIL import Image
 import torch
 import tempfile
 import cv2
-
-
-
+from ultralytics import YOLO
 
 # Load the saved model
 model = tf.keras.models.load_model("traffic_sign_model.h5")
 
 # --- Load YOLOv5 Model ---
-yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path='best.pt', force_reload=True)
+#yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path='best.pt', force_reload=True)
+yolo_model = YOLO('best.pt')
 
 # --- Class Labels ---
 class_names = [
