@@ -8,9 +8,10 @@ import torch
 import tempfile
 import cv2
 from ultralytics import YOLO
+from keras.utils import custom_object_scope
 
-# Load the saved model
-model = tf.keras.models.load_model("traffic_sign_model.h5")
+with custom_object_scope({'custom_activation': custom_activation}):
+    model = tf.keras.models.load_model("traffic_sign_model.h5")
 
 # --- Load YOLOv5 Model ---
 #yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path='best.pt', force_reload=True)
@@ -30,7 +31,7 @@ class_names = [
     "End of all speed limits", "Turn right ahead", "Turn left ahead",
     "Ahead only", "Go straight or right", "Go straight or left",
     "Keep right", "Keep left", "Roundabout mandatory", "End of no passing",
-    "End of no passing for vehicles > 3.5 tons", "Pedestrian crossing", "Traffic signals"
+    "End of no passing for vehicles > 3.5 tons", "Class 44", "Traffic signals"
 ]
 
 # --- Streamlit UI ---
